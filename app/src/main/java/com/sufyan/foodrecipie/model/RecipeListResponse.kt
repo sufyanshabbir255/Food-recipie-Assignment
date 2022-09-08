@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class RecipeListResponse(
     @SerializedName("count")
-    val count: Int?,
+    val count: Int? = 0,
     @SerializedName("results")
-    val results: List<Result?>?
+    val results: List<Result?>? = arrayListOf()
 ) {
     data class Result(
         @SerializedName("approved_at")
