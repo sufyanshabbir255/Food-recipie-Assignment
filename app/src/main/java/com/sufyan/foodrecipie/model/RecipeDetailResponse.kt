@@ -7,9 +7,9 @@ data class RecipeDetailResponse(
     @SerializedName("count")
     val count: Int?,
     @SerializedName("results")
-    val results: List<Result?>?
+    val results: List<Recipe?>?
 ) {
-    data class Result(
+    data class Recipe(
         @SerializedName("approved_at")
         val approvedAt: Int?,
         @SerializedName("aspect_ratio")

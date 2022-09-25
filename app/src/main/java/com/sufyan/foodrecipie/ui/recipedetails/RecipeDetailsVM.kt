@@ -1,24 +1,24 @@
-package com.sufyan.foodrecipie.ui.recipelist
+package com.sufyan.foodrecipie.ui.recipedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sufyan.foodrecipie.IServiceProvider
-import com.sufyan.foodrecipie.model.RecipeListResponse
+import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeListVM(var recipeServiceProvider: IServiceProvider) : ViewModel(), IRecipeList {
-    private var _recipeList: MutableLiveData<RecipeListResponse> = MutableLiveData()
-    override val recipeList: LiveData<RecipeListResponse> = _recipeList
+class RecipeDetailsVM(var recipeService: IServiceProvider) : ViewModel(), IRecipeDetails {
+    private var _recipeDetails: MutableLiveData<RecipeDetailResponse> = MutableLiveData()
+    override val recipeDetails: LiveData<RecipeDetailResponse> = _recipeDetails
 
-    override fun fetchRecipeList() {
+    override fun fetchRecipeDetails() {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = recipeServiceProvider.getRecipeList()) {
+            when (val response = recipeService.getRecipeDetails()) {
                 is NetworkResult.Success -> {
-                    _recipeList.value = response.data
+                    _recipeDetails.value = response.data
                 }
                 is NetworkResult.Error -> {
 
