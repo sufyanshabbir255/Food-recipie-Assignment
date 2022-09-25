@@ -12,9 +12,9 @@ class RecipeListResponseTest {
     @Test
     fun `test json response maps to recipe list model`() {
         val recipeListResponse = readJsonFile()
-        Assert.assertEquals(20, recipeListResponse.results?.size)
-        Assert.assertEquals("How To Make Classic French Toast", recipeListResponse.results?.first()?.name)
-        Assert.assertEquals("Avocado Citrus Salad", recipeListResponse.results?.last()?.name)
+        Assert.assertEquals(20, recipeListResponse.recipes?.size)
+        Assert.assertEquals("How To Make Classic French Toast", recipeListResponse.recipes?.first()?.name)
+        Assert.assertEquals("Avocado Citrus Salad", recipeListResponse.recipes?.last()?.name)
     }
 
     private fun readJsonFile(): RecipeListResponse {

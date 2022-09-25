@@ -1,13 +1,19 @@
 package com.sufyan.foodrecipie
 
+import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import retrofit2.Response
 
 class RecipeRepository constructor(private val service: RecipeService) : IServiceProvider {
+
     override suspend fun getRecipeList(): NetworkResult<RecipeListResponse> {
         val response = service.getRecipeListRequest()
         return handleResponse(response)
+    }
+
+    override suspend fun getRecipeDetails(): NetworkResult<RecipeDetailResponse> {
+        return handleResponse(service.getRecipeDetailsRequest())
     }
 
 

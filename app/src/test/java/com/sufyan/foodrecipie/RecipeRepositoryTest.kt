@@ -2,17 +2,16 @@ package com.sufyan.foodrecipie
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
-import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
@@ -21,30 +20,27 @@ internal class RecipeRepositoryTest {
 
     // Set the main coroutines dispatcher for unit testing.
     @ExperimentalCoroutinesApi
-    @get:Rule
+    @Rule
+    @JvmField
     var mainCoroutineRule = CoroutineRule()
 
-    @Before
-    fun setUp() {
-        MockKAnnotations.init(this)
-    }
+    private var mockService = mockk<RecipeService>()
+    private val sut = RecipeRepository(mockService)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `test if network success response map with defined model`() {
+    fun `test if recipe list success response map with defined model`() = runTest {
         val mockResponse = Response.success(readJsonFile())
         val mockService = mockk<RecipeService>()
         coEvery { mockService.getRecipeListRequest() } returns mockResponse
         val sut = RecipeRepository(mockService)
-        mainCoroutineRule.runBlockingTest {
-            val actualRecipeList = sut.getRecipeList() as NetworkResult.Success
-            Assert.assertEquals(mockResponse.body()?.results, actualRecipeList.data.results)
-        }
+        val actualRecipeList = sut.getRecipeList() as NetworkResult.Success
+        Assert.assertEquals(mockResponse.body()?.recipes, actualRecipeList.data.recipes)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `test if network response fails and test the error msg mapping`() {
+    fun `test if network response fails and test the error msg mapping`() = runTest {
         val errorMsg = "This api is not working"
         val mockResponse = Response.error<RecipeListResponse>(
             400,
@@ -53,11 +49,35 @@ internal class RecipeRepositoryTest {
         val mockService = mockk<RecipeService>()
         coEvery { mockService.getRecipeListRequest() } returns mockResponse
         val sut = RecipeRepository(mockService)
-        mainCoroutineRule.runBlockingTest {
-            val expectedResponse = sut.getRecipeList() as NetworkResult.Error
-            Assert.assertEquals(errorMsg, expectedResponse.error)
-        }
+        val expectedResponse = sut.getRecipeList() as NetworkResult.Error
+        Assert.assertEquals(errorMsg, expectedResponse.error)
+    }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test if recipe detail success response map on the defined model`() = runTest {
+        val mockResponse = Response.success(readJsonFile1())
+        coEvery {
+            mockService.getRecipeDetailsRequest()
+        } returns mockResponse
+        val expectedResponse = sut.getRecipeDetails() as NetworkResult.Success
+        Assert.assertEquals(mockResponse.body()?.results, expectedResponse.data.results)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test if recipe detail failed response map on the error`() = runTest {
+        val error = "This api is not working"
+        val errorResponse = Response.error<RecipeDetailResponse>(
+            400,
+            error.toResponseBody("application/json".toMediaTypeOrNull())
+        )
+        coEvery {
+            mockService.getRecipeDetailsRequest()
+        } returns errorResponse
+
+        val expectedResponse = sut.getRecipeDetails() as NetworkResult.Error
+        Assert.assertEquals(error, expectedResponse.error)
     }
 
     private fun readJsonFile(): RecipeListResponse {
@@ -65,4 +85,21 @@ internal class RecipeRepositoryTest {
         val itemType = object : TypeToken<RecipeListResponse>() {}.type
         return gson.fromJson(ReadAssetFile.readFileFromTestResources("FoodRecipeResponse.json"), itemType)
     }
+
+    private fun readJsonFile1(): RecipeDetailResponse {
+        val gson = GsonBuilder().create()
+        val itemType = object : TypeToken<RecipeDetailResponse>() {}.type
+        return gson.fromJson(ReadAssetFile.readFileFromTestResources("FoodRecipeDetailResponse.json"), itemType)
+    }
+
+//    inline fun <reified T : Any> getApiMockResponse(
+//        fileName: String,
+//        noinline completionHandler: ((data: T) -> Unit)? = null
+//    ) {
+//        val gson = GsonBuilder().create()
+//        val itemType = object : TypeToken<T>() {}.type
+//        completionHandler?.let {
+//            it.invoke(gson.fromJson(ReadAssetFile.readFileFromTestResources(fileName), itemType))
+//        }
+//    }
 }

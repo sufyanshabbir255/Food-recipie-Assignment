@@ -1,5 +1,6 @@
 package com.sufyan.foodrecipie
 
+import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,6 +12,9 @@ import retrofit2.http.GET
 interface RecipeService {
     @GET("recipes/list")
     suspend fun getRecipeListRequest(): Response<RecipeListResponse>
+
+    @GET("recipes/list-similarities")
+    suspend fun getRecipeDetailsRequest(): Response<RecipeDetailResponse>
 
     companion object {
         private const val BASE_URL = "https://rapidapi.com/apidojo/api/tasty/"
