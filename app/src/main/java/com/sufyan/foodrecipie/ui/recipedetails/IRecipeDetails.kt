@@ -5,5 +5,5 @@ import com.sufyan.foodrecipie.model.RecipeDetailResponse
 
 interface IRecipeDetails {
     val recipeDetails: LiveData<RecipeDetailResponse>
-    fun fetchRecipeDetails()
+    fun getRecipeDetails()
 }

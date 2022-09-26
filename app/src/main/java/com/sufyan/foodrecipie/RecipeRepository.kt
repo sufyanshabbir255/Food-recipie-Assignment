@@ -4,15 +4,16 @@ import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import retrofit2.Response
+import java.io.IOException
 
 class RecipeRepository constructor(private val service: RecipeService) : IServiceProvider {
 
-    override suspend fun getRecipeList(): NetworkResult<RecipeListResponse> {
+    override suspend fun fetchRecipeList(): NetworkResult<RecipeListResponse> {
         val response = service.getRecipeListRequest()
         return handleResponse(response)
     }
 
-    override suspend fun getRecipeDetails(): NetworkResult<RecipeDetailResponse> {
+    override suspend fun fetchRecipeDetails(): NetworkResult<RecipeDetailResponse> {
         return handleResponse(service.getRecipeDetailsRequest())
     }
 
@@ -22,9 +23,9 @@ class RecipeRepository constructor(private val service: RecipeService) : IServic
             return if (response.isSuccessful)
                 NetworkResult.Success(response.body()!!)
             else
-                NetworkResult.Error("This api is not working")
-        } catch (e: Exception) {
-            NetworkResult.Error(e.localizedMessage ?: "")
+                NetworkResult.Error(IOException("This api is not working"))
+        } catch (exception: Exception) {
+            NetworkResult.Error(exception)
         }
     }
 }

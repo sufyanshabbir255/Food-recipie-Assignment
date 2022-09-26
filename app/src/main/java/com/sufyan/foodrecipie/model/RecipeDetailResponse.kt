@@ -5,311 +5,309 @@ import com.google.gson.annotations.SerializedName
 
 data class RecipeDetailResponse(
     @SerializedName("count")
-    val count: Int?,
+    val count: Int? = null,
     @SerializedName("results")
-    val results: List<Recipe?>?
+    val results: List<Recipe?>? = null
 ) {
     data class Recipe(
         @SerializedName("approved_at")
-        val approvedAt: Int?,
+        val approvedAt: Int? = null,
         @SerializedName("aspect_ratio")
-        val aspectRatio: String?,
+        val aspectRatio: String? = null,
         @SerializedName("beauty_url")
-        val beautyUrl: String?,
+        val beautyUrl: String? = null,
         @SerializedName("brand")
-        val brand: Brand?,
+        val brand: Brand? = null,
         @SerializedName("brand_id")
-        val brandId: Int?,
+        val brandId: Int? = null,
         @SerializedName("buzz_id")
-        val buzzId: Int?,
+        val buzzId: Any? = null,
         @SerializedName("canonical_id")
-        val canonicalId: String?,
+        val canonicalId: String? = null,
         @SerializedName("compilations")
-        val compilations: List<Compilation?>?,
+        val compilations: List<Compilation?>? = null,
         @SerializedName("cook_time_minutes")
-        val cookTimeMinutes: Int?,
+        val cookTimeMinutes: Int? = null,
         @SerializedName("country")
-        val country: String?,
+        val country: String? = null,
         @SerializedName("created_at")
-        val createdAt: Int?,
+        val createdAt: Int? = null,
         @SerializedName("credits")
-        val credits: List<Credit?>?,
+        val credits: List<Credit?>? = null,
         @SerializedName("description")
-        val description: String?,
+        val description: String? = null,
         @SerializedName("draft_status")
-        val draftStatus: String?,
+        val draftStatus: String? = null,
         @SerializedName("facebook_posts")
-        val facebookPosts: List<Any?>?,
+        val facebookPosts: List<Any?>? = null,
         @SerializedName("id")
-        val id: Int?,
+        val id: Int? = null,
         @SerializedName("inspired_by_url")
-        val inspiredByUrl: String?,
+        val inspiredByUrl: Any? = null,
         @SerializedName("instructions")
-        val instructions: List<Instruction?>?,
+        val instructions: List<Instruction?>? = null,
         @SerializedName("is_one_top")
-        val isOneTop: Boolean?,
+        val isOneTop: Boolean? = null,
         @SerializedName("is_shoppable")
-        val isShoppable: Boolean?,
+        val isShoppable: Boolean? = null,
         @SerializedName("keywords")
-        val keywords: String?,
+        val keywords: String? = null,
         @SerializedName("language")
-        val language: String?,
+        val language: String? = null,
         @SerializedName("name")
-        val name: String?,
+        val name: String? = null,
         @SerializedName("num_servings")
-        val numServings: Int?,
+        val numServings: Int? = null,
         @SerializedName("nutrition")
-        val nutrition: Nutrition?,
+        val nutrition: Nutrition? = null,
         @SerializedName("nutrition_visibility")
-        val nutritionVisibility: String?,
+        val nutritionVisibility: String? = null,
         @SerializedName("original_video_url")
-        val originalVideoUrl: String?,
+        val originalVideoUrl: String? = null,
         @SerializedName("prep_time_minutes")
-        val prepTimeMinutes: Int?,
+        val prepTimeMinutes: Int? = null,
         @SerializedName("promotion")
-        val promotion: String?,
+        val promotion: String? = null,
         @SerializedName("renditions")
-        val renditions: List<Rendition?>?,
+        val renditions: List<Rendition?>? = null,
         @SerializedName("sections")
-        val sections: List<Section?>?,
+        val sections: List<Section?>? = null,
         @SerializedName("seo_title")
-        val seoTitle: String?,
+        val seoTitle: String? = null,
         @SerializedName("servings_noun_plural")
-        val servingsNounPlural: String?,
+        val servingsNounPlural: String? = null,
         @SerializedName("servings_noun_singular")
-        val servingsNounSingular: String?,
+        val servingsNounSingular: String? = null,
         @SerializedName("show")
-        val show: Show?,
+        val show: Show? = null,
         @SerializedName("show_id")
-        val showId: Int?,
-        @SerializedName("similarity")
-        val similarity: Double?,
+        val showId: Int? = null,
         @SerializedName("slug")
-        val slug: String?,
+        val slug: String? = null,
         @SerializedName("tags")
-        val tags: List<Tag?>?,
+        val tags: List<Tag?>? = null,
         @SerializedName("thumbnail_alt_text")
-        val thumbnailAltText: String?,
+        val thumbnailAltText: String? = null,
         @SerializedName("thumbnail_url")
-        val thumbnailUrl: String?,
+        val thumbnailUrl: String? = null,
         @SerializedName("tips_and_ratings_enabled")
-        val tipsAndRatingsEnabled: Boolean?,
+        val tipsAndRatingsEnabled: Boolean? = null,
         @SerializedName("topics")
-        val topics: List<Topic?>?,
+        val topics: List<Topic?>? = null,
         @SerializedName("total_time_minutes")
-        val totalTimeMinutes: Int?,
+        val totalTimeMinutes: Int? = null,
         @SerializedName("total_time_tier")
-        val totalTimeTier: TotalTimeTier?,
+        val totalTimeTier: TotalTimeTier? = null,
         @SerializedName("updated_at")
-        val updatedAt: Int?,
+        val updatedAt: Int? = null,
         @SerializedName("user_ratings")
-        val userRatings: UserRatings?,
+        val userRatings: UserRatings? = null,
         @SerializedName("video_ad_content")
-        val videoAdContent: String?,
+        val videoAdContent: String? = null,
         @SerializedName("video_id")
-        val videoId: Int?,
+        val videoId: Int? = null,
         @SerializedName("video_url")
-        val videoUrl: String?,
+        val videoUrl: String? = null,
         @SerializedName("yields")
-        val yields: String?
+        val yields: String? = null
     ) {
         data class Brand(
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("image_url")
-            val imageUrl: String?,
+            val imageUrl: String? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("slug")
-            val slug: String?
+            val slug: String? = null
         )
 
         data class Compilation(
             @SerializedName("approved_at")
-            val approvedAt: Int?,
+            val approvedAt: Int? = null,
             @SerializedName("aspect_ratio")
-            val aspectRatio: String?,
+            val aspectRatio: String? = null,
             @SerializedName("beauty_url")
-            val beautyUrl: String?,
+            val beautyUrl: Any? = null,
             @SerializedName("buzz_id")
-            val buzzId: Any?,
+            val buzzId: Any? = null,
             @SerializedName("canonical_id")
-            val canonicalId: String?,
+            val canonicalId: String? = null,
             @SerializedName("country")
-            val country: String?,
+            val country: String? = null,
             @SerializedName("created_at")
-            val createdAt: Int?,
+            val createdAt: Int? = null,
             @SerializedName("description")
-            val description: String?,
+            val description: Any? = null,
             @SerializedName("draft_status")
-            val draftStatus: String?,
+            val draftStatus: String? = null,
             @SerializedName("facebook_posts")
-            val facebookPosts: List<Any?>?,
+            val facebookPosts: List<Any?>? = null,
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("is_shoppable")
-            val isShoppable: Boolean?,
+            val isShoppable: Boolean? = null,
             @SerializedName("keywords")
-            val keywords: Any?,
+            val keywords: Any? = null,
             @SerializedName("language")
-            val language: String?,
+            val language: String? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("promotion")
-            val promotion: String?,
+            val promotion: String? = null,
             @SerializedName("show")
-            val show: List<Show?>?,
+            val show: List<Show?>? = null,
             @SerializedName("slug")
-            val slug: String?,
+            val slug: String? = null,
             @SerializedName("thumbnail_alt_text")
-            val thumbnailAltText: String?,
+            val thumbnailAltText: String? = null,
             @SerializedName("thumbnail_url")
-            val thumbnailUrl: String?,
+            val thumbnailUrl: String? = null,
             @SerializedName("video_id")
-            val videoId: Int?,
+            val videoId: Int? = null,
             @SerializedName("video_url")
-            val videoUrl: String?
+            val videoUrl: String? = null
         ) {
             data class Show(
                 @SerializedName("id")
-                val id: Int?,
+                val id: Int? = null,
                 @SerializedName("name")
-                val name: String?
+                val name: String? = null
             )
         }
 
         data class Credit(
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("image_url")
-            val imageUrl: String?,
+            val imageUrl: String? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("slug")
-            val slug: String?,
+            val slug: String? = null,
             @SerializedName("type")
-            val type: String?
+            val type: String? = null
         )
 
         data class Instruction(
             @SerializedName("appliance")
-            val appliance: String?,
+            val appliance: String? = null,
             @SerializedName("display_text")
-            val displayText: String?,
+            val displayText: String? = null,
             @SerializedName("end_time")
-            val endTime: Int?,
+            val endTime: Int? = null,
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("position")
-            val position: Int?,
+            val position: Int? = null,
             @SerializedName("start_time")
-            val startTime: Int?,
+            val startTime: Int? = null,
             @SerializedName("temperature")
-            val temperature: Int?
+            val temperature: Int? = null
         )
 
         data class Nutrition(
             @SerializedName("calories")
-            val calories: Int?,
+            val calories: Int? = null,
             @SerializedName("carbohydrates")
-            val carbohydrates: Int?,
+            val carbohydrates: Int? = null,
             @SerializedName("fat")
-            val fat: Int?,
+            val fat: Int? = null,
             @SerializedName("fiber")
-            val fiber: Int?,
+            val fiber: Int? = null,
             @SerializedName("protein")
-            val protein: Int?,
+            val protein: Int? = null,
             @SerializedName("sugar")
-            val sugar: Int?,
+            val sugar: Int? = null,
             @SerializedName("updated_at")
-            val updatedAt: String?
+            val updatedAt: String? = null
         )
 
         data class Rendition(
             @SerializedName("aspect")
-            val aspect: String?,
+            val aspect: String? = null,
             @SerializedName("bit_rate")
-            val bitRate: Int?,
+            val bitRate: Int? = null,
             @SerializedName("container")
-            val container: String?,
+            val container: String? = null,
             @SerializedName("content_type")
-            val contentType: String?,
+            val contentType: String? = null,
             @SerializedName("duration")
-            val duration: Int?,
+            val duration: Int? = null,
             @SerializedName("file_size")
-            val fileSize: Int?,
+            val fileSize: Int? = null,
             @SerializedName("height")
-            val height: Int?,
+            val height: Int? = null,
             @SerializedName("maximum_bit_rate")
-            val maximumBitRate: Int?,
+            val maximumBitRate: Int? = null,
             @SerializedName("minimum_bit_rate")
-            val minimumBitRate: Int?,
+            val minimumBitRate: Int? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("poster_url")
-            val posterUrl: String?,
+            val posterUrl: String? = null,
             @SerializedName("url")
-            val url: String?,
+            val url: String? = null,
             @SerializedName("width")
-            val width: Int?
+            val width: Int? = null
         )
 
         data class Section(
             @SerializedName("components")
-            val components: List<Component?>?,
+            val components: List<Component?>? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("position")
-            val position: Int?
+            val position: Int? = null
         ) {
             data class Component(
                 @SerializedName("extra_comment")
-                val extraComment: String?,
+                val extraComment: String? = null,
                 @SerializedName("id")
-                val id: Int?,
+                val id: Int? = null,
                 @SerializedName("ingredient")
-                val ingredient: Ingredient?,
+                val ingredient: Ingredient? = null,
                 @SerializedName("measurements")
-                val measurements: List<Measurement?>?,
+                val measurements: List<Measurement?>? = null,
                 @SerializedName("position")
-                val position: Int?,
+                val position: Int? = null,
                 @SerializedName("raw_text")
-                val rawText: String?
+                val rawText: String? = null
             ) {
                 data class Ingredient(
                     @SerializedName("created_at")
-                    val createdAt: Int?,
+                    val createdAt: Int? = null,
                     @SerializedName("display_plural")
-                    val displayPlural: String?,
+                    val displayPlural: String? = null,
                     @SerializedName("display_singular")
-                    val displaySingular: String?,
+                    val displaySingular: String? = null,
                     @SerializedName("id")
-                    val id: Int?,
+                    val id: Int? = null,
                     @SerializedName("name")
-                    val name: String?,
+                    val name: String? = null,
                     @SerializedName("updated_at")
-                    val updatedAt: Int?
+                    val updatedAt: Int? = null
                 )
 
                 data class Measurement(
                     @SerializedName("id")
-                    val id: Int?,
+                    val id: Int? = null,
                     @SerializedName("quantity")
-                    val quantity: String?,
+                    val quantity: String? = null,
                     @SerializedName("unit")
-                    val unit: Unit?
+                    val unit: Unit? = null
                 ) {
                     data class Unit(
                         @SerializedName("abbreviation")
-                        val abbreviation: String?,
+                        val abbreviation: String? = null,
                         @SerializedName("display_plural")
-                        val displayPlural: String?,
+                        val displayPlural: String? = null,
                         @SerializedName("display_singular")
-                        val displaySingular: String?,
+                        val displaySingular: String? = null,
                         @SerializedName("name")
-                        val name: String?,
+                        val name: String? = null,
                         @SerializedName("system")
-                        val system: String?
+                        val system: String? = null
                     )
                 }
             }
@@ -317,43 +315,43 @@ data class RecipeDetailResponse(
 
         data class Show(
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("name")
-            val name: String?
+            val name: String? = null
         )
 
         data class Tag(
             @SerializedName("display_name")
-            val displayName: String?,
+            val displayName: String? = null,
             @SerializedName("id")
-            val id: Int?,
+            val id: Int? = null,
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("type")
-            val type: String?
+            val type: String? = null
         )
 
         data class Topic(
             @SerializedName("name")
-            val name: String?,
+            val name: String? = null,
             @SerializedName("slug")
-            val slug: String?
+            val slug: String? = null
         )
 
         data class TotalTimeTier(
             @SerializedName("display_tier")
-            val displayTier: String?,
+            val displayTier: String? = null,
             @SerializedName("tier")
-            val tier: String?
+            val tier: String? = null
         )
 
         data class UserRatings(
             @SerializedName("count_negative")
-            val countNegative: Int?,
+            val countNegative: Int? = null,
             @SerializedName("count_positive")
-            val countPositive: Int?,
+            val countPositive: Int? = null,
             @SerializedName("score")
-            val score: Double?
+            val score: Double? = null
         )
     }
 }

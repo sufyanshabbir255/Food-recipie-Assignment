@@ -16,7 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
 
-internal class RecipeRepositoryTest {
+class RecipeRepositoryTest {
 
     // Set the main coroutines dispatcher for unit testing.
     @ExperimentalCoroutinesApi
@@ -34,7 +34,7 @@ internal class RecipeRepositoryTest {
         val mockService = mockk<RecipeService>()
         coEvery { mockService.getRecipeListRequest() } returns mockResponse
         val sut = RecipeRepository(mockService)
-        val actualRecipeList = sut.getRecipeList() as NetworkResult.Success
+        val actualRecipeList = sut.fetchRecipeList() as NetworkResult.Success
         Assert.assertEquals(mockResponse.body()?.recipes, actualRecipeList.data.recipes)
     }
 
@@ -49,8 +49,8 @@ internal class RecipeRepositoryTest {
         val mockService = mockk<RecipeService>()
         coEvery { mockService.getRecipeListRequest() } returns mockResponse
         val sut = RecipeRepository(mockService)
-        val expectedResponse = sut.getRecipeList() as NetworkResult.Error
-        Assert.assertEquals(errorMsg, expectedResponse.error)
+        val expectedResponse = sut.fetchRecipeList() as NetworkResult.Error
+        Assert.assertEquals(errorMsg, expectedResponse.error.message)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -60,7 +60,7 @@ internal class RecipeRepositoryTest {
         coEvery {
             mockService.getRecipeDetailsRequest()
         } returns mockResponse
-        val expectedResponse = sut.getRecipeDetails() as NetworkResult.Success
+        val expectedResponse = sut.fetchRecipeDetails() as NetworkResult.Success
         Assert.assertEquals(mockResponse.body()?.results, expectedResponse.data.results)
     }
 
@@ -76,8 +76,8 @@ internal class RecipeRepositoryTest {
             mockService.getRecipeDetailsRequest()
         } returns errorResponse
 
-        val expectedResponse = sut.getRecipeDetails() as NetworkResult.Error
-        Assert.assertEquals(error, expectedResponse.error)
+        val expectedResponse = sut.fetchRecipeDetails() as NetworkResult.Error
+        Assert.assertEquals(error, expectedResponse.error.message)
     }
 
     private fun readJsonFile(): RecipeListResponse {

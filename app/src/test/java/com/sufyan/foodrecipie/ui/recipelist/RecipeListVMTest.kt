@@ -8,6 +8,7 @@ import com.sufyan.foodrecipie.model.RecipeListResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import com.sufyan.foodrecipie.ui.getOrAwaitValue
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -30,15 +31,34 @@ class RecipeListVMTest {
     @Test
     fun `fetch recipe list with success`() = runTest {
         val mockRepository = mockk<IServiceProvider> {
-            coEvery { getRecipeList() } returns NetworkResult.Success(
+            coEvery { fetchRecipeList() } returns NetworkResult.Success(
                 mockk { coEvery { recipes } returns listOf(RecipeListResponse.Recipe()) }
             )
         }
         val sut = RecipeListVM(mockRepository)
-        sut.fetchRecipeList()
+        sut.getRecipeList()
 
         Assert.assertEquals(listOf(RecipeListResponse.Recipe()), sut.recipeList.getOrAwaitValue().recipes)
 
 //        coVerify { mockRepository.getRecipeList() }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `fetch recipe list with failure`() = runTest {
+        val errorMsg = "This request unfortunately failed please try again"
+        val mockRepository = mockk<IServiceProvider>() {
+            coEvery {
+                fetchRecipeList()
+            } returns NetworkResult.Error(
+                mockk { coEvery { message } returns errorMsg })
+        }
+        val sut = RecipeListVM(mockRepository)
+        sut.getRecipeList()
+        Assert.assertEquals(RecipeListResponse(), sut.recipeList.getOrAwaitValue())
+
+        coVerify {
+            mockRepository.fetchRecipeList()
+        }
     }
 }

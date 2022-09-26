@@ -14,14 +14,14 @@ class RecipeListVM(var recipeServiceProvider: IServiceProvider) : ViewModel(), I
     private var _recipeList: MutableLiveData<RecipeListResponse> = MutableLiveData()
     override val recipeList: LiveData<RecipeListResponse> = _recipeList
 
-    override fun fetchRecipeList() {
+    override fun getRecipeList() {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = recipeServiceProvider.getRecipeList()) {
+            when (val response = recipeServiceProvider.fetchRecipeList()) {
                 is NetworkResult.Success -> {
                     _recipeList.value = response.data
                 }
                 is NetworkResult.Error -> {
-
+                    _recipeList.value = RecipeListResponse()
                 }
             }
         }

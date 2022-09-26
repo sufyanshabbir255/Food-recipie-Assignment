@@ -27,11 +27,11 @@ class RecipeDetailsVMTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun `if recipe detail list with success`() {
+    fun `fetch recipe detail list response with success`() {
         val mockResponse = readJson()
         val mockRepository = mockk<IServiceProvider>() {
             coEvery {
-                getRecipeDetails()
+                fetchRecipeDetails()
             } returns NetworkResult.Success(
                 mockk {
                     coEvery { results } returns listOf(mockResponse.results?.get(0))
@@ -39,8 +39,31 @@ class RecipeDetailsVMTest {
             )
         }
         val sut = RecipeDetailsVM(mockRepository)
-        sut.fetchRecipeDetails()
+        sut.getRecipeDetails()
         Assert.assertEquals(listOf(mockResponse.results?.get(0)), sut.recipeDetails.getOrAwaitValue().results)
+    }
+
+    @Test
+    fun `fetch recipe details list response with error`() {
+        val errorMsg = "This request unfortunately failed please try again"
+        val mockRepository = mockk<IServiceProvider> {
+            coEvery { fetchRecipeDetails() } returns NetworkResult.Error(
+                mockk {
+                    coEvery {
+                        message
+                    } returns errorMsg
+                }
+            )
+        }
+        val sut = RecipeDetailsVM(mockRepository)
+        sut.getRecipeDetails()
+
+        Assert.assertEquals(RecipeDetailResponse(), sut.recipeDetails.getOrAwaitValue())
+
+//        coVerify {
+//            mockGithubRepository.fetchRepositories()
+//        }
+
     }
 
     private fun readJson(): RecipeDetailResponse {
