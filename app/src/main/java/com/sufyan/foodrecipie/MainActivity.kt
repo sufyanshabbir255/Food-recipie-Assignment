@@ -26,8 +26,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mViewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mViewBinding.root)
-        mViewBinding.rvRecipeList.adapter = recipeListAdapter
+        initRecyclerView()
         addObserver()
+    }
+
+    private fun initRecyclerView() {
+        mViewBinding.rvRecipeList.adapter = recipeListAdapter
     }
 
     private fun addObserver() {
