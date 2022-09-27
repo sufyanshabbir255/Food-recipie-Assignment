@@ -1,7 +1,9 @@
 package com.sufyan.foodrecipie.network
 
+import com.sufyan.foodrecipie.BuildConfig
 import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
+import com.sufyan.foodrecipie.network.base.CookiesInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -17,14 +19,17 @@ interface RecipeService {
     suspend fun getRecipeDetailsRequest(): Response<RecipeDetailResponse>
 
     companion object {
-        private const val BASE_URL = "https://rapidapi.com/apidojo/api/tasty/"
+        private const val BASE_URL = "https://tasty.p.rapidapi.com"
 
         fun create(): RecipeService {
-            val logger = HttpLoggingInterceptor()
-            logger.level = HttpLoggingInterceptor.Level.BASIC
+            val loggingInterceptor = HttpLoggingInterceptor()
+            if (BuildConfig.DEBUG) {
+                loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
+            }
 
             val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(CookiesInterceptor())
                 .build()
 
             return Retrofit.Builder()

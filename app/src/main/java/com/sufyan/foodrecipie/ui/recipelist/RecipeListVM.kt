@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sufyan.foodrecipie.network.IServiceProvider
 import com.sufyan.foodrecipie.model.RecipeListResponse
+import com.sufyan.foodrecipie.network.IServiceProvider
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,10 +21,10 @@ class RecipeListVM @Inject constructor(var recipeServiceProvider: IServiceProvid
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = recipeServiceProvider.fetchRecipeList()) {
                 is NetworkResult.Success -> {
-                    _recipeList.value = response.data
+                    _recipeList.postValue(response.data)
                 }
                 is NetworkResult.Error -> {
-                    _recipeList.value = RecipeListResponse()
+                    _recipeList.postValue(RecipeListResponse())
                 }
             }
         }
