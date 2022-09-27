@@ -5,8 +5,9 @@ import com.sufyan.foodrecipie.model.RecipeListResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class RecipeRepository constructor(private val service: RecipeService) : IServiceProvider {
+class RecipeRepository @Inject constructor(private val service: RecipeService) : IServiceProvider {
 
     override suspend fun fetchRecipeList(): NetworkResult<RecipeListResponse> {
         val response = service.getRecipeListRequest()
