@@ -1,14 +1,18 @@
 package com.sufyan.foodrecipie.data.dtos
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class RecipeListResponse(
     @SerializedName("count")
     val count: Int? = 0,
     @SerializedName("results")
     val recipes: List<Recipe>? = arrayListOf()
-) {
+) : Parcelable {
+    @Parcelize
     data class Recipe(
         @SerializedName("approved_at")
         val approvedAt: Int? = null,
@@ -16,36 +20,22 @@ data class RecipeListResponse(
         val aspectRatio: String? = null,
         @SerializedName("beauty_url")
         val beautyUrl: String? = null,
-        @SerializedName("brand")
-        val brand: Brand? = null,
         @SerializedName("brand_id")
         val brandId: Int? = null,
-        @SerializedName("buzz_id")
-        val buzzId: Any? = null,
         @SerializedName("canonical_id")
         val canonicalId: String? = null,
-        @SerializedName("compilations")
-        val compilations: List<Compilation?>? = null,
         @SerializedName("cook_time_minutes")
         val cookTimeMinutes: Int? = null,
         @SerializedName("country")
         val country: String? = null,
         @SerializedName("created_at")
         val createdAt: Int? = null,
-        @SerializedName("credits")
-        val credits: List<Credit?>? = null,
         @SerializedName("description")
         val description: String? = null,
         @SerializedName("draft_status")
         val draftStatus: String? = null,
-        @SerializedName("facebook_posts")
-        val facebookPosts: List<Any?>? = null,
         @SerializedName("id")
         val id: Int? = null,
-        @SerializedName("inspired_by_url")
-        val inspiredByUrl: Any? = null,
-        @SerializedName("instructions")
-        val instructions: List<Instruction?>? = null,
         @SerializedName("is_one_top")
         val isOneTop: Boolean? = null,
         @SerializedName("is_shoppable")
@@ -58,8 +48,6 @@ data class RecipeListResponse(
         val name: String? = null,
         @SerializedName("num_servings")
         val numServings: Int? = null,
-        @SerializedName("nutrition")
-        val nutrition: Nutrition? = null,
         @SerializedName("nutrition_visibility")
         val nutritionVisibility: String? = null,
         @SerializedName("original_video_url")
@@ -68,24 +56,16 @@ data class RecipeListResponse(
         val prepTimeMinutes: Int? = null,
         @SerializedName("promotion")
         val promotion: String? = null,
-        @SerializedName("renditions")
-        val renditions: List<Rendition?>? = null,
-        @SerializedName("sections")
-        val sections: List<Section?>? = null,
         @SerializedName("seo_title")
         val seoTitle: String? = null,
         @SerializedName("servings_noun_plural")
         val servingsNounPlural: String? = null,
         @SerializedName("servings_noun_singular")
         val servingsNounSingular: String? = null,
-        @SerializedName("show")
-        val show: Show? = null,
         @SerializedName("show_id")
         val showId: Int? = null,
         @SerializedName("slug")
         val slug: String? = null,
-        @SerializedName("tags")
-        val tags: List<Tag?>? = null,
         @SerializedName("thumbnail_alt_text")
         val thumbnailAltText: String? = null,
         @SerializedName("thumbnail_url")
@@ -96,12 +76,8 @@ data class RecipeListResponse(
         val topics: List<Topic?>? = null,
         @SerializedName("total_time_minutes")
         val totalTimeMinutes: Int? = null,
-        @SerializedName("total_time_tier")
-        val totalTimeTier: TotalTimeTier? = null,
         @SerializedName("updated_at")
         val updatedAt: Int? = null,
-        @SerializedName("user_ratings")
-        val userRatings: UserRatings? = null,
         @SerializedName("video_ad_content")
         val videoAdContent: String? = null,
         @SerializedName("video_id")
@@ -110,7 +86,7 @@ data class RecipeListResponse(
         val videoUrl: String? = null,
         @SerializedName("yields")
         val yields: String? = null
-    ) {
+    ) : Parcelable {
         data class Brand(
             @SerializedName("id")
             val id: Int? = null,
@@ -331,12 +307,13 @@ data class RecipeListResponse(
             val type: String? = null
         )
 
+        @Parcelize
         data class Topic(
             @SerializedName("name")
             val name: String? = null,
             @SerializedName("slug")
             val slug: String? = null
-        )
+        ) : Parcelable
 
         data class TotalTimeTier(
             @SerializedName("display_tier")

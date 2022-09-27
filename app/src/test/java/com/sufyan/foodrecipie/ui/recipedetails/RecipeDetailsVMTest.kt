@@ -34,7 +34,7 @@ class RecipeDetailsVMTest {
                 fetchRecipeDetails()
             } returns NetworkResult.Success(
                 mockk {
-                    coEvery { results } returns listOf(mockResponse.results?.get(0))
+                    coEvery { results } returns listOf(mockResponse.results!![0])
                 }
             )
         }

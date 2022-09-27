@@ -1,6 +1,6 @@
 package com.sufyan.foodrecipie.ui.adapter
 
-import android.widget.Toast
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sufyan.foodrecipie.R
@@ -9,13 +9,12 @@ import com.sufyan.foodrecipie.databinding.LayoutItemRecipeBinding
 
 class RecipeListViewHolder(private val itemBinding: LayoutItemRecipeBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
-    init {
-        itemView.setOnClickListener {
-            Toast.makeText(itemBinding.root.context, "", Toast.LENGTH_SHORT).show()
-        }
-    }
 
-    fun bind(item: RecipeListResponse.Recipe) {
+    fun bind(
+        item: RecipeListResponse.Recipe,
+        position: Int,
+        onItemClickListener: ((view: View, position: Int, data: RecipeListResponse.Recipe?) -> Unit)?
+    ) {
         with(itemBinding) {
             val recipePictureUrl = item.thumbnailUrl.takeIf {
                 it != null
@@ -25,6 +24,9 @@ class RecipeListViewHolder(private val itemBinding: LayoutItemRecipeBinding) :
                     .load(recipePictureUrl)
                     .into(ivThumbnail)
             tvRecipeName.text = item.name
+            clMain.setOnClickListener {
+                onItemClickListener?.invoke(itemView, position, item)
+            }
         }
     }
 }
