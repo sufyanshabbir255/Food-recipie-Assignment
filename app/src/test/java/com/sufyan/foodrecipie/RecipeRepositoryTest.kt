@@ -4,6 +4,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
+import com.sufyan.foodrecipie.network.RecipeRepository
+import com.sufyan.foodrecipie.network.RecipeService
 import com.sufyan.foodrecipie.network.base.NetworkResult
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -16,6 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
 
+@ExperimentalCoroutinesApi
 class RecipeRepositoryTest {
 
     // Set the main coroutines dispatcher for unit testing.
@@ -27,7 +30,6 @@ class RecipeRepositoryTest {
     private var mockService = mockk<RecipeService>()
     private val sut = RecipeRepository(mockService)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test if recipe list success response map with defined model`() = runTest {
         val mockResponse = Response.success(readJsonFile())
@@ -38,7 +40,6 @@ class RecipeRepositoryTest {
         Assert.assertEquals(mockResponse.body()?.recipes, actualRecipeList.data.recipes)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test if network response fails and test the error msg mapping`() = runTest {
         val errorMsg = "This api is not working"
@@ -53,7 +54,6 @@ class RecipeRepositoryTest {
         Assert.assertEquals(errorMsg, expectedResponse.error.message)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test if recipe detail success response map on the defined model`() = runTest {
         val mockResponse = Response.success(readJsonFile1())
@@ -64,7 +64,6 @@ class RecipeRepositoryTest {
         Assert.assertEquals(mockResponse.body()?.results, expectedResponse.data.results)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `test if recipe detail failed response map on the error`() = runTest {
         val error = "This api is not working"

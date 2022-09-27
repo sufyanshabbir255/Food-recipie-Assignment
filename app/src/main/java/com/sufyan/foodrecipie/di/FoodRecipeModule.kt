@@ -1,8 +1,8 @@
 package com.sufyan.foodrecipie.di
 
-import com.sufyan.foodrecipie.IServiceProvider
-import com.sufyan.foodrecipie.RecipeRepository
-import com.sufyan.foodrecipie.RecipeService
+import com.sufyan.foodrecipie.network.IServiceProvider
+import com.sufyan.foodrecipie.network.RecipeRepository
+import com.sufyan.foodrecipie.network.RecipeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

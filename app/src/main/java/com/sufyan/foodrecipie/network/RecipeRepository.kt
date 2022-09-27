@@ -1,4 +1,4 @@
-package com.sufyan.foodrecipie
+package com.sufyan.foodrecipie.network
 
 import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse
@@ -17,7 +17,6 @@ class RecipeRepository @Inject constructor(private val service: RecipeService) :
     override suspend fun fetchRecipeDetails(): NetworkResult<RecipeDetailResponse> {
         return handleResponse(service.getRecipeDetailsRequest())
     }
-
 
     private fun <T : Any> handleResponse(response: Response<T>): NetworkResult<T> {
         return try {

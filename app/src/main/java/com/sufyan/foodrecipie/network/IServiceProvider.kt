@@ -1,4 +1,4 @@
-package com.sufyan.foodrecipie
+package com.sufyan.foodrecipie.network
 
 import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.model.RecipeListResponse

@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.sufyan.foodrecipie.CoroutineRule
-import com.sufyan.foodrecipie.IServiceProvider
+import com.sufyan.foodrecipie.network.IServiceProvider
 import com.sufyan.foodrecipie.ReadAssetFile
 import com.sufyan.foodrecipie.model.RecipeDetailResponse
 import com.sufyan.foodrecipie.network.base.NetworkResult
@@ -59,10 +59,6 @@ class RecipeDetailsVMTest {
         sut.getRecipeDetails()
 
         Assert.assertEquals(RecipeDetailResponse(), sut.recipeDetails.getOrAwaitValue())
-
-//        coVerify {
-//            mockGithubRepository.fetchRepositories()
-//        }
 
     }
 
