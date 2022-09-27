@@ -7,7 +7,7 @@ data class RecipeListResponse(
     @SerializedName("count")
     val count: Int? = 0,
     @SerializedName("results")
-    val recipes: List<Recipe?>? = arrayListOf()
+    val recipes: List<Recipe>? = arrayListOf()
 ) {
     data class Recipe(
         @SerializedName("approved_at")
