@@ -1,8 +1,8 @@
-package com.sufyan.foodrecipie.network
+package com.sufyan.foodrecipie.data.network
 
-import com.sufyan.foodrecipie.model.RecipeDetailResponse
-import com.sufyan.foodrecipie.model.RecipeListResponse
-import com.sufyan.foodrecipie.network.base.NetworkResult
+import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject

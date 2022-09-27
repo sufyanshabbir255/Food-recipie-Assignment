@@ -3,9 +3,9 @@ package com.sufyan.foodrecipie.ui.recipelist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.sufyan.foodrecipie.CoroutineRule
-import com.sufyan.foodrecipie.model.RecipeListResponse
-import com.sufyan.foodrecipie.network.IServiceProvider
-import com.sufyan.foodrecipie.network.base.NetworkResult
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
+import com.sufyan.foodrecipie.data.network.IServiceProvider
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import com.sufyan.foodrecipie.ui.getOrAwaitValue
 import io.mockk.coEvery
 import io.mockk.mockk

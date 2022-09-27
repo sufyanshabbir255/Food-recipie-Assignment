@@ -1,8 +1,9 @@
-package com.sufyan.foodrecipie.model
+package com.sufyan.foodrecipie.data.dtos
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.sufyan.foodrecipie.ReadAssetFile
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
 import org.junit.Assert
 import org.junit.Test
 

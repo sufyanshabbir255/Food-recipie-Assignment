@@ -1,4 +1,4 @@
-package com.sufyan.foodrecipie.model
+package com.sufyan.foodrecipie.data.dtos
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -6,7 +6,7 @@ import com.sufyan.foodrecipie.ReadAssetFile
 import org.junit.Assert
 import org.junit.Test
 
-class RecipeDetailsResponseTest {
+class RecipeDetailResponseTest {
 
     @Test
     fun `test json response maps on recipe details response model`() {

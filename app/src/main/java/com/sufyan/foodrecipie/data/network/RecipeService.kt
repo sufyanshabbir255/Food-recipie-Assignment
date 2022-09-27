@@ -1,9 +1,9 @@
-package com.sufyan.foodrecipie.network
+package com.sufyan.foodrecipie.data.network
 
 import com.sufyan.foodrecipie.BuildConfig
-import com.sufyan.foodrecipie.model.RecipeDetailResponse
-import com.sufyan.foodrecipie.model.RecipeListResponse
-import com.sufyan.foodrecipie.network.base.CookiesInterceptor
+import com.sufyan.foodrecipie.data.base.CookiesInterceptor
+import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

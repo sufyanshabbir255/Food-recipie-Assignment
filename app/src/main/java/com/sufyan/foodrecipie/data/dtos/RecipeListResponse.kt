@@ -1,4 +1,4 @@
-package com.sufyan.foodrecipie.model
+package com.sufyan.foodrecipie.data.dtos
 
 
 import com.google.gson.annotations.SerializedName

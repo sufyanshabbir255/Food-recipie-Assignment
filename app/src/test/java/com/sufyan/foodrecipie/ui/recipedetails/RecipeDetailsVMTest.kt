@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.sufyan.foodrecipie.CoroutineRule
-import com.sufyan.foodrecipie.network.IServiceProvider
+import com.sufyan.foodrecipie.data.network.IServiceProvider
 import com.sufyan.foodrecipie.ReadAssetFile
-import com.sufyan.foodrecipie.model.RecipeDetailResponse
-import com.sufyan.foodrecipie.network.base.NetworkResult
+import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import com.sufyan.foodrecipie.ui.getOrAwaitValue
 import io.mockk.coEvery
 import io.mockk.mockk

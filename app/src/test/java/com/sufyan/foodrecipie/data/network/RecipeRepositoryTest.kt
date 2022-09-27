@@ -1,12 +1,14 @@
-package com.sufyan.foodrecipie
+package com.sufyan.foodrecipie.data.network
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.sufyan.foodrecipie.model.RecipeDetailResponse
-import com.sufyan.foodrecipie.model.RecipeListResponse
-import com.sufyan.foodrecipie.network.RecipeRepository
-import com.sufyan.foodrecipie.network.RecipeService
-import com.sufyan.foodrecipie.network.base.NetworkResult
+import com.sufyan.foodrecipie.CoroutineRule
+import com.sufyan.foodrecipie.ReadAssetFile
+import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
+import com.sufyan.foodrecipie.data.network.RecipeRepository
+import com.sufyan.foodrecipie.data.network.RecipeService
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi

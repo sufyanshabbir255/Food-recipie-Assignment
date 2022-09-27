@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sufyan.foodrecipie.model.RecipeListResponse
-import com.sufyan.foodrecipie.network.IServiceProvider
-import com.sufyan.foodrecipie.network.base.NetworkResult
+import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
+import com.sufyan.foodrecipie.data.network.IServiceProvider
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
