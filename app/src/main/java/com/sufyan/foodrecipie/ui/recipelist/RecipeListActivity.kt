@@ -1,4 +1,4 @@
-package com.sufyan.foodrecipie
+package com.sufyan.foodrecipie.ui.recipelist
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,19 +8,17 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
-import com.sufyan.foodrecipie.databinding.ActivityMainBinding
+import com.sufyan.foodrecipie.databinding.ActivityRecipeListBinding
 import com.sufyan.foodrecipie.ui.ViewState
 import com.sufyan.foodrecipie.ui.adapter.RecipeListAdapter
 import com.sufyan.foodrecipie.ui.recipedetails.RecipeDetailsActivity
-import com.sufyan.foodrecipie.ui.recipelist.IRecipeList
-import com.sufyan.foodrecipie.ui.recipelist.RecipeListVM
 import com.sufyan.foodrecipie.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    private lateinit var mViewBinding: ActivityMainBinding
+class RecipeListActivity : AppCompatActivity() {
+    private lateinit var mViewBinding: ActivityRecipeListBinding
     private val viewModel: IRecipeList by viewModels<RecipeListVM>()
 
     @Inject
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewBinding = ActivityMainBinding.inflate(layoutInflater)
+        mViewBinding = ActivityRecipeListBinding.inflate(layoutInflater)
         setContentView(mViewBinding.root)
         initRecyclerView()
         addObserver()
@@ -44,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val itemClickListener = { view: View, position: Int, data: RecipeListResponse.Recipe? ->
-        val intent = Intent(this@MainActivity, RecipeDetailsActivity::class.java)
+        val intent = Intent(this@RecipeListActivity, RecipeDetailsActivity::class.java)
         intent.putExtra("data", data)
         startActivity(intent)
     }
