@@ -1,21 +1,21 @@
 package com.sufyan.foodrecipie.data.network
 
+import com.sufyan.foodrecipie.data.base.NetworkResult
 import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
 import com.sufyan.foodrecipie.data.dtos.RecipeListResponse
-import com.sufyan.foodrecipie.data.base.NetworkResult
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(private val service: RecipeService) : IServiceProvider {
 
-    override suspend fun fetchRecipeList(): NetworkResult<RecipeListResponse> {
-        val response = service.getRecipeListRequest()
+    override suspend fun fetchRecipeList(from: Int, size: Int): NetworkResult<RecipeListResponse> {
+        val response = service.getRecipeListRequest(from = from, size = size)
         return handleResponse(response)
     }
 
-    override suspend fun fetchRecipeDetails(): NetworkResult<RecipeDetailResponse> {
-        return handleResponse(service.getRecipeDetailsRequest())
+    override suspend fun fetchRecipeDetails(recipeId: Int): NetworkResult<RecipeDetailResponse> {
+        return handleResponse(service.getRecipeDetailsRequest(recipeId))
     }
 
     private fun <T : Any> handleResponse(response: Response<T>): NetworkResult<T> {

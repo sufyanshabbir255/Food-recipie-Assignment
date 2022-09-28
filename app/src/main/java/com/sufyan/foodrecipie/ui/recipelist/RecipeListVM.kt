@@ -22,13 +22,13 @@ class RecipeListVM @Inject constructor(var recipeServiceProvider: IServiceProvid
     override val viewState: LiveData<ViewState> = _viewState
 
     init {
-        getRecipeList()
+        getRecipeList(0, 50)
     }
 
-    override fun getRecipeList() {
+    override fun getRecipeList(from: Int, size: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _viewState.postValue(ViewState.Loading)
-            when (val response = recipeServiceProvider.fetchRecipeList()) {
+            when (val response = recipeServiceProvider.fetchRecipeList(from, size)) {
                 is NetworkResult.Success -> {
                     _viewState.postValue(ViewState.ResponseLoaded(response.data.recipes))
                     _recipeList.postValue(response.data)

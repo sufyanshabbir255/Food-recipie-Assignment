@@ -32,11 +32,11 @@ class RecipeRepositoryTest {
 
     @Test
     fun `test if recipe list success response map with defined model`() = runTest {
-        val mockResponse = Response.success(readJsonFile())
+        val mockResponse = Response.success(readRecipeListJsonFile())
         val mockService = mockk<RecipeService>()
-        coEvery { mockService.getRecipeListRequest() } returns mockResponse
+        coEvery { mockService.getRecipeListRequest(0, 20) } returns mockResponse
         val sut = RecipeRepository(mockService)
-        val actualRecipeList = sut.fetchRecipeList() as NetworkResult.Success
+        val actualRecipeList = sut.fetchRecipeList(0, 20) as NetworkResult.Success
         Assert.assertEquals(mockResponse.body()?.recipes, actualRecipeList.data.recipes)
     }
 
@@ -48,44 +48,46 @@ class RecipeRepositoryTest {
             errorMsg.toResponseBody("application/json".toMediaTypeOrNull())
         )
         val mockService = mockk<RecipeService>()
-        coEvery { mockService.getRecipeListRequest() } returns mockResponse
+        coEvery { mockService.getRecipeListRequest(0, 20) } returns mockResponse
         val sut = RecipeRepository(mockService)
-        val expectedResponse = sut.fetchRecipeList() as NetworkResult.Error
+        val expectedResponse = sut.fetchRecipeList(0, 20) as NetworkResult.Error
         Assert.assertEquals(errorMsg, expectedResponse.error.message)
     }
 
     @Test
     fun `test if recipe detail success response map on the defined model`() = runTest {
-        val mockResponse = Response.success(readJsonFile1())
+        val recipeId = 123
+        val mockResponse = Response.success(readRecipeDetailsJsonFile())
         coEvery {
-            mockService.getRecipeDetailsRequest()
+            mockService.getRecipeDetailsRequest(recipeId)
         } returns mockResponse
-        val expectedResponse = sut.fetchRecipeDetails() as NetworkResult.Success
+        val expectedResponse = sut.fetchRecipeDetails(recipeId) as NetworkResult.Success
         Assert.assertEquals(mockResponse.body()?.results, expectedResponse.data.results)
     }
 
     @Test
     fun `test if recipe detail failed response map on the error`() = runTest {
+        val recipeId = 123
         val error = "This api is not working"
         val errorResponse = Response.error<RecipeDetailResponse>(
             400,
             error.toResponseBody("application/json".toMediaTypeOrNull())
         )
         coEvery {
-            mockService.getRecipeDetailsRequest()
+            mockService.getRecipeDetailsRequest(recipeId)
         } returns errorResponse
 
-        val expectedResponse = sut.fetchRecipeDetails() as NetworkResult.Error
+        val expectedResponse = sut.fetchRecipeDetails(recipeId) as NetworkResult.Error
         Assert.assertEquals(error, expectedResponse.error.message)
     }
 
-    private fun readJsonFile(): RecipeListResponse {
+    private fun readRecipeListJsonFile(): RecipeListResponse {
         val gson = GsonBuilder().create()
         val itemType = object : TypeToken<RecipeListResponse>() {}.type
         return gson.fromJson(ReadAssetFile.readFileFromTestResources("FoodRecipeResponse.json"), itemType)
     }
 
-    private fun readJsonFile1(): RecipeDetailResponse {
+    private fun readRecipeDetailsJsonFile(): RecipeDetailResponse {
         val gson = GsonBuilder().create()
         val itemType = object : TypeToken<RecipeDetailResponse>() {}.type
         return gson.fromJson(ReadAssetFile.readFileFromTestResources("FoodRecipeDetailResponse.json"), itemType)

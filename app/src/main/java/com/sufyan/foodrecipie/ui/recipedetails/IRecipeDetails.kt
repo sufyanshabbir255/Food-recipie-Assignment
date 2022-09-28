@@ -9,6 +9,6 @@ interface IRecipeDetails {
     val recipeDetails: LiveData<RecipeDetailResponse>
     val recipe: LiveData<RecipeListResponse.Recipe>
     val viewState: LiveData<SimilarRecipeViewState>
-    fun getRecipeDetails()
+    fun getRecipeDetails(recipeId: Int)
     fun setData(recipe: RecipeListResponse.Recipe)
 }

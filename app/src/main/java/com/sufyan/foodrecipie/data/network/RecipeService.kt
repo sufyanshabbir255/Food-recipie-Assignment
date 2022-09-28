@@ -10,13 +10,21 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
+
+private const val timeoutRead = 60L
+private const val timeoutConnect = 60L
 
 interface RecipeService {
     @GET("recipes/list")
-    suspend fun getRecipeListRequest(): Response<RecipeListResponse>
+    suspend fun getRecipeListRequest(
+        @Query("from") from: Int = 0,
+        @Query("size") size: Int = 0
+    ): Response<RecipeListResponse>
 
     @GET("recipes/list-similarities")
-    suspend fun getRecipeDetailsRequest(): Response<RecipeDetailResponse>
+    suspend fun getRecipeDetailsRequest(@Query("recipe_id") recipeId: Int): Response<RecipeDetailResponse>
 
     companion object {
         private const val BASE_URL = "https://tasty.p.rapidapi.com"
@@ -30,6 +38,8 @@ interface RecipeService {
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(CookiesInterceptor())
+                .connectTimeout(timeoutConnect, TimeUnit.SECONDS)
+                .readTimeout(timeoutRead, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder()

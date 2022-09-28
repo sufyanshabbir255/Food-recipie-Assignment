@@ -55,7 +55,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
             tvRecipeName.text = recipe.name
             tvRecipeDesc.text = recipe.description
         }
-        viewModel.getRecipeDetails()
+        viewModel.getRecipeDetails(recipe.id ?: 0)
     }
 
     private val itemClickListener = { view: View, position: Int, data: RecipeDetailResponse.Recipe? ->

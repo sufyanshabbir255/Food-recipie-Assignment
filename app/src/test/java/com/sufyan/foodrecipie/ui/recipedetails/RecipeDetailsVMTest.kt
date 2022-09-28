@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.sufyan.foodrecipie.CoroutineRule
-import com.sufyan.foodrecipie.data.network.IServiceProvider
 import com.sufyan.foodrecipie.ReadAssetFile
-import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
 import com.sufyan.foodrecipie.data.base.NetworkResult
+import com.sufyan.foodrecipie.data.dtos.RecipeDetailResponse
+import com.sufyan.foodrecipie.data.network.IServiceProvider
 import com.sufyan.foodrecipie.ui.getOrAwaitValue
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -28,10 +28,11 @@ class RecipeDetailsVMTest {
 
     @Test
     fun `fetch recipe detail list response with success`() {
+        val recipeId = 123
         val mockResponse = readJson()
         val mockRepository = mockk<IServiceProvider>() {
             coEvery {
-                fetchRecipeDetails()
+                fetchRecipeDetails(recipeId)
             } returns NetworkResult.Success(
                 mockk {
                     coEvery { results } returns listOf(mockResponse.results!![0])
@@ -39,15 +40,16 @@ class RecipeDetailsVMTest {
             )
         }
         val sut = RecipeDetailsVM(mockRepository)
-        sut.getRecipeDetails()
+        sut.getRecipeDetails(recipeId)
         Assert.assertEquals(listOf(mockResponse.results?.get(0)), sut.recipeDetails.getOrAwaitValue().results)
     }
 
     @Test
     fun `fetch recipe details list response with error`() {
+        val recipeId = 123
         val errorMsg = "This request unfortunately failed please try again"
         val mockRepository = mockk<IServiceProvider> {
-            coEvery { fetchRecipeDetails() } returns NetworkResult.Error(
+            coEvery { fetchRecipeDetails(recipeId) } returns NetworkResult.Error(
                 mockk {
                     coEvery {
                         message
@@ -56,7 +58,7 @@ class RecipeDetailsVMTest {
             )
         }
         val sut = RecipeDetailsVM(mockRepository)
-        sut.getRecipeDetails()
+        sut.getRecipeDetails(recipeId)
 
         Assert.assertEquals(RecipeDetailResponse(), sut.recipeDetails.getOrAwaitValue())
 

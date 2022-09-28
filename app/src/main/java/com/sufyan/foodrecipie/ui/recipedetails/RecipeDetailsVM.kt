@@ -27,10 +27,10 @@ class RecipeDetailsVM @Inject constructor(var recipeService: IServiceProvider) :
         _recipe.value = recipe
     }
 
-    override fun getRecipeDetails() {
+    override fun getRecipeDetails(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _viewState.postValue(SimilarRecipeViewState.Loading)
-            when (val response = recipeService.fetchRecipeDetails()) {
+            when (val response = recipeService.fetchRecipeDetails(recipeId)) {
                 is NetworkResult.Success -> {
                     _viewState.postValue(SimilarRecipeViewState.ResponseLoaded(response.data.results))
                     _recipeDetails.postValue(response.data)
